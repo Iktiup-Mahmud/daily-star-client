@@ -1,0 +1,10 @@
+.navb:hover{
+    background: gray;
+    color: aliceblue;
+}
+
+.category:hover{
+    background-color: salmon;
+    border-radius: .5rem;
+    color: aliceblue;
+}
