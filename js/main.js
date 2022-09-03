@@ -11,7 +11,6 @@ const loadCategory = async () => {
 }
 
 const displayCategory = categorys => {
-    console.log(categorys);
     const allCategoryFind = document.getElementById('all-category');
     categorys.forEach( category => {
         const categoryDiv = document.createElement('div');
@@ -19,7 +18,7 @@ const displayCategory = categorys => {
         <div class='category'>
             <div onclick="categoryClick(${category.category_id})" class='btn p-3 fw-semibold' href='#'>${category.category_name}</div>
         </div>`
-        allCategoryFind.appendChild(categoryDiv)
+        allCategoryFind.appendChild(categoryDiv)    
     });
 }
 
@@ -30,11 +29,24 @@ const categoryClick = async id => {
         const data = await response.json();
         // console.log(data.data)
         displayNews(data.data)
+        newsNumber(data.data.length)
     }
     catch(error){
         console.log(error)
     }
 }
+
+const newsNumber = (data) => {
+    const newsNumberFind = document.getElementById('news-number');
+    newsNumberFind.innerHTML = ``;
+    const newsNumberDiv = document.createElement('div');
+    newsNumberDiv.classList.add('p-3', 'my-4', 'border', 'rounded')
+    newsNumberDiv.innerHTML = `
+    <h3 class='text-center'> ${data} news found.</h3>
+    `
+    newsNumberFind.appendChild(newsNumberDiv)
+}
+
 
 const displayNews = datas => {
     const mediaSection = document.getElementById('media-section');
