@@ -24,6 +24,7 @@ const displayCategory = categorys => {
 
 const categoryClick = async id => {
     const url = (`https://openapi.programming-hero.com/api/news/category/0${id}`)
+    toogleSpinner(true)
     try{
         const response = await fetch(url);
         const data = await response.json();
@@ -83,13 +84,9 @@ const displayNews = datas => {
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
 
-
                             <div class="btn btn-danger py-3 px-4 m-2 modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalId('${data._id}')">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
-                            
-
-                            
 
                         </div>
                     </div>
@@ -98,11 +95,12 @@ const displayNews = datas => {
             </div>
         `
         mediaSection.appendChild(newsDiv)
-})
+    })
+    toogleSpinner(false)
 }
 
 
-const modalId = async id => {
+const modalId = async (id) => {
     const url = (`https://openapi.programming-hero.com/api/news/${id}`);
     try{
         const response = await fetch(url);
@@ -115,8 +113,7 @@ const modalId = async id => {
 }
 
 const modal = async (data) => {
-    console.log(data)
-    const modalId = document.getElementById('modal-id')
+    const modalId = document.getElementById('modal-id');
     const modalDiv = document.createElement('div');
     modalDiv.innerHTML = `
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,8 +137,18 @@ const modal = async (data) => {
     modalId.appendChild(modalDiv)
 }
 
+const toogleSpinner = isLoading => {
+    const spinner = document.getElementById('spinner')
+    if (isLoading){
+        spinner.classList.remove('d-none')
+    }
+    else{
+        spinner.classList.add('d-none')
+    }
+}
 
 
+toogleSpinner(true)
 
 
 categoryClick(01)
