@@ -55,7 +55,19 @@ const displayNews = datas => {
                     <div class="card-body p-4">
                         <h4 class="card-title">${data.title}</h4>
                         <p class="card-text">${data.details.length > 450 ? data.details.slice(0, 450) + " ...." : data.details}</p>
-                        
+                        <br>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <img class='author-img rounded-pill' src="${data.author.img ? data.author.img : "no image found"}">
+                                <div class="ps-2">
+                                    <h6 class="fw-bold">${data.author.name ? data.author.name : 'no name found'}</h6>
+                                    <p>${data.author.published_date ? data.author.published_date : 'no date found'}</p>
+                                </div>
+                            </div>
+                            <h6 class="p-3 m-2"><i class="fa-solid fa-eye"></i>${data.total_view}</h6>
+                            <h1>name</h1>
+                            <h1>name</h1>
+                        </div>
                     </div>
                 </div>
             </div>
