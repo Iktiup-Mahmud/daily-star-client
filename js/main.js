@@ -36,8 +36,6 @@ const categoryClick = async id => {
     }
 }
 
-// const 
-
 const displayNews = datas => {
     const mediaSection = document.getElementById('media-section');
     // console.log(data)
@@ -72,9 +70,15 @@ const displayNews = datas => {
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-                            <div class="btn btn-danger py-3 px-4 m-2 modal-btn">
+
+
+                            <div class="btn btn-danger py-3 px-4 m-2 modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalId('${data._id}')">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
+                            
+
+                            
+
                         </div>
                     </div>
                 </div>
@@ -86,6 +90,43 @@ const displayNews = datas => {
 }
 
 
+const modalId = async id => {
+    const url = (`https://openapi.programming-hero.com/api/news/${id}`);
+    try{
+        const response = await fetch(url);
+        const data = await response.json();
+        modal(data.data);
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+const modal = async (data) => {
+    console.log(data)
+    const modalId = document.getElementById('modal-id')
+    const modalDiv = document.createElement('div');
+    modalDiv.innerHTML = `
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <h6 class="modal-title d-block" id="exampleModalLabel">Author Name: ${data[0].author.name ? data[0].author.name : 'no name found'}</h6>
+                    <p class="modal-title" id="exampleModalLabel">Author Name: ${data[0].author.published_date ? data[0].author.published_date : "no date found"}</p>
+                </div>
+
+                <div class="modal-body text-center">
+                    <img src="${data[0].author.img}" style="height: 300px; width: 300px">
+                    <h6 class="pt-3">View: ${data[0].total_view ? data[0].total_view : 'no data found'}</h6>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+`
+    modalId.appendChild(modalDiv)
+}
 
 
 
