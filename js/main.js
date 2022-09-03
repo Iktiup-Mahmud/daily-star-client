@@ -64,9 +64,17 @@ const displayNews = datas => {
                                     <p>${data.author.published_date ? data.author.published_date : 'no date found'}</p>
                                 </div>
                             </div>
-                            <h6 class="p-3 m-2"><i class="fa-solid fa-eye"></i>${data.total_view}</h6>
-                            <h1>name</h1>
-                            <h1>name</h1>
+                            <h6 class="p-3 m-2"><i class="fa-solid fa-eye"> </i> ${data.total_view ? data.total_view : 'no view'}</h6>
+                            <div class='p-3 m-2 text-warning'>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <div class="btn btn-danger py-3 px-4 m-2 modal-btn">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
