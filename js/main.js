@@ -60,24 +60,24 @@ const displayNews = datas => {
         newsDiv.innerHTML = `
         <div class="card m-3 shadow p-3 mb-5 bg-body rounded">
             <div class="row g-0 ">
-                <div class="col-lg-3 col-sm-12 py-4">
-                    <img src="${data.image_url}" class="img-fluid rounded-start" alt="...">
+                <div class="col-lg-3 col-sm-12 p-2">
+                    <img src="${data.thumbnail_url}" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-lg-9 col-sm-12">
                     <div class="card-body p-4">
                         <h4 class="card-title">${data.title}</h4>
                         <p class="card-text">${data.details.length > 450 ? data.details.slice(0, 450) + " ...." : data.details}</p>
                         <br>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex">
+                        <div class="d-lg-flex justify-content-between">
+                            <div class="d-inline-flex ">
                                 <img class='author-img rounded-pill' src="${data.author.img ? data.author.img : "no image found"}">
                                 <div class="ps-2">
                                     <h6 class="fw-bold">${data.author.name ? data.author.name : 'no name found'}</h6>
                                     <p>${data.author.published_date ? data.author.published_date : 'no date found'}</p>
                                 </div>
                             </div>
-                            <h6 class="p-3 m-2"><i class="fa-solid fa-eye"> </i> ${data.total_view ? data.total_view : 'no view'}</h6>
-                            <div class='p-3 m-2 text-warning'>
+                            <h6 class="p-3 m-2 d-inline"><i class="fa-solid fa-eye"> </i> ${data.total_view ? data.total_view : 'no view'}</h6>
+                            <div class='p-3 m-2 text-warning d-inline-flex'>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
@@ -85,7 +85,7 @@ const displayNews = datas => {
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
 
-                            <div type="button" class="btn btn-danger py-3 px-4 m-2 modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalId('${data._id}')">
+                            <div type="button" class="btn btn-danger py-3 px-4 m-2 modal-btn d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalId('${data._id}')">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
                                
