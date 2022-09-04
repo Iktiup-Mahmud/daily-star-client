@@ -30,11 +30,11 @@ const categoryClick = async id => {
         const response = await fetch(url);
         const data = await response.json();
         // console.log(data.data)
-        displayNews(data.data)
-        newsNumber(data.data.length)
+        displayNews(data.data);
+        newsNumber(data.data.length);
     }
     catch(error){
-        console.log(error)
+        console.log(error);
     }
 }
 
@@ -46,7 +46,7 @@ const newsNumber = (data) => {
     newsNumberDiv.innerHTML = `
     <h3 class='text-center'> ${data} news found.</h3>
     `
-    newsNumberFind.appendChild(newsNumberDiv)
+    newsNumberFind.appendChild(newsNumberDiv);
 }
 
 
@@ -84,11 +84,10 @@ const displayNews = datas => {
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-
-                            <div type="button" class="btn btn-danger py-3 px-4 m-2 modal-btn d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalId('${data._id}')">
+                            
+                            <button type="button" class="btn btn-danger py-3 px-4 m-2 modal-btn d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="modalId('${data._id}')">
                                 <i class="fa-solid fa-arrow-right"></i>
-                            </div>
-                               
+                            </button>        
 
                         </div>
                     </div>
@@ -96,18 +95,20 @@ const displayNews = datas => {
             </div>
             </div>
         `
-        mediaSection.appendChild(newsDiv)
+        mediaSection.appendChild(newsDiv);
     })
-    toogleSpinner(false)
+    toogleSpinner(false);
 }
 
 
 const modalId = async (id) => {
+    console.log(id)
     const url = (`https://openapi.programming-hero.com/api/news/${id}`);
+    console.log(url)
     try{
         const response = await fetch(url);
         const data = await response.json();
-        modal(data.data);
+        modal(data.data[0]);
     }
     catch(error){
         console.log(error)
@@ -115,29 +116,20 @@ const modalId = async (id) => {
 }
 
 const modal = data => {
-    const modalId = document.getElementById('modal-id');
     console.log(data)
-    const modalDiv = document.createElement('div');
-    modalDiv.innerHTML = `
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header flex-column">
-                    <h6 class="modal-title" id="exampleModalLabel">Author Name: ${data[0].author.name ? data[0].author.name : 'no name found'}</h6>
-                    <p class="modal-title" id="exampleModalLabel">Author Name: ${data[0].author.published_date ? data[0].author.published_date : "no date found"}</p>
-                </div>
-
-                <div class="modal-body text-center">
-                    <img src="${data[0].image_url}" style="height: 300px; width: 300px">
-                    <h6 class="pt-3">View: ${data[0].total_view ? data[0].total_view : 'no data found'}</h6>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
+    const modalTitle = document.getElementById('exampleModalLabel');
+    modalTitle.innerText = data.title;
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+    <div class= "text-center">
+        <img src='${data.image_url ? data.image_url : "no image found"}' style:"height=400px; width=400px">
+    </div>
+    <h6 class="m-2">Author Name: ${data.author.name ? data.author.name : 'no name found'}</h6>
+    <h6 class="m-2">Total View: ${data.total_view ? data.total_view : 'no data found'}</h6>
+    <h6 class="m-2">Rating Number: ${data.rating.number ? data.rating.number : 'no data found'}</h6>
+    <h6 class="m-2">Rating Badge: ${data.rating.badge ? data.rating.badge : 'no data found'}</h6>
+    <h6 class="m-2">Publish Date: ${data.author.published_date  ? data.author.published_date : 'no data found'}</h6>
 `
-    modalId.appendChild(modalDiv)
 }
 
 const toogleSpinner = isLoading => {
@@ -149,10 +141,6 @@ const toogleSpinner = isLoading => {
         spinner.classList.add('d-none')
     }
 }
-
-
-toogleSpinner(true)
-
 
 categoryClick(01)
 loadCategory()
