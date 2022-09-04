@@ -84,7 +84,7 @@ const displayNews = datas => {
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-                            
+
                             <button type="button" class="btn btn-danger py-3 px-4 m-2 modal-btn d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="modalId('${data._id}')">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>        
@@ -118,7 +118,7 @@ const modalId = async (id) => {
 const modal = data => {
     console.log(data)
     const modalTitle = document.getElementById('exampleModalLabel');
-    modalTitle.innerText = data.title;
+    modalTitle.innerText = `Title: ${data.title}`;
     const modalBody = document.getElementById('modal-body');
     modalBody.innerHTML = `
     <div class= "text-center">
